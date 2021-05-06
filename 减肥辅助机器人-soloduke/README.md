@@ -11,7 +11,7 @@
 		见img/下
 	- 安装、编译指南等
 		- 根据requirement进行安装，这边的配置是直接支持wechat公众号的交互
-		- 也可以在amazon_reduce_weight/handler_function.py中运行
+		- 也可以在amazon_reduce_weight/handler_function.py中运行单个模块的代码进行测试
 	- 团队介绍：团队成员、联系方式等
 		- 团队成员：李俊毅，13603542466，nlp爱好者
 	- 使用到的亚马逊云科技服务内容

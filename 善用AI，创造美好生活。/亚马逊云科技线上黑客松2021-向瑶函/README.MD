@@ -9,8 +9,9 @@
 ![image](https://user-images.githubusercontent.com/59185223/117802052-91b7c100-b287-11eb-8cbd-ecb6ac0a8fcc.png)
 
 # 三、安装、编译指南：
-数据源太大了（75M），我不太会上传到github，麻烦各位在此链接自行下载：
-源码【向瑶函Demo】直接用notebook打开再运行即可
+数据源太大了（75M），我不太会上传到github，麻烦各位在此链接自行下载：https://pan.baidu.com/share/init?surl=bgPbESbLOlUSu4QC-4O46g
+（密码：gx6i），选择chestmnist下载即可。
+源码【向瑶函Demo】直接用notebook打开再运行即可。
 
 # 四、团队介绍：
 团队成员就我一个：向瑶函

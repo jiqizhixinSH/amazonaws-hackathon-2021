@@ -3,6 +3,8 @@
 据《柳叶刀》于今年1月8日的研究显示，在COVID-19发病6个月后，住院时病情更重的患者更可能呈现肺功能下降和胸部影像学异常。
 为此，本文通过Keras架构的卷积神经网络，用Amazon SageMaker作为底层运行环境和调参平台，对Med-MNIST中89687张肺病患者X光胸片进行训练，最终训练出在22,433个测试集上准确率为64%的AI。
 
+文件里面的【亚马逊云科技线上黑客松2021-向瑶函.pptx】是作品展示的PPT，【向瑶函Demo】是源码
+
 # 二、作品截图：
 ![image](https://user-images.githubusercontent.com/59185223/117802022-89f81c80-b287-11eb-91ee-83fba0da62e4.png)
 ![image](https://user-images.githubusercontent.com/59185223/117802040-8ebcd080-b287-11eb-90d3-cb5eddf0ac27.png)

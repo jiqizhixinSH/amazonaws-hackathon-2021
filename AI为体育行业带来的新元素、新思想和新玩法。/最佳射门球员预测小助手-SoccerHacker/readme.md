@@ -27,7 +27,7 @@ Packages:
 
 a) Firstly, you need to download the pre-training weights file for the model from [**here**](https://pjreddie.com/media/files/yolov3.weights)
 
-b) Then, put the weigth file in `\test\`, open the demo notebook: test.ipynb
+b) Then, put the weigth file in folder `\test`, open the demo notebook: test.ipynb
 
 c) Run it!!!
 

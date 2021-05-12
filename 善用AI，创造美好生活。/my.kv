@@ -1,0 +1,76 @@
+# https://blog.csdn.net/cloveses/article/details/80385986
+MyForm:        # 顶级GUI部件类
+<MyForm>:      # 定义MyForm类
+    orientation:"vertical"    # 定义orientation属性的值（所以添加widget是从上往下）
+    text_input:text_box       # 定义用于外部引用的名称，指向id为text_box的GUI部件
+    label_output:label_box
+ 
+    BoxLayout:                # 定义子GUI部件
+        height:"20dp"         # 高度
+        size_hint_y:80      # 纵向占比
+
+        Label:
+            id:label_box
+            text:""
+            size_hint_x:100
+            
+    BoxLayout:                # 定义子GUI部件
+        height:"20dp"         # 高度
+        size_hint_y:20     # 纵向占比 None
+ 
+        TextInput:
+            id:text_box
+            size_hint_x:40  # 横向占比（多个同级GUI部件的占比比例来分配实际大小）
+            font_name:root.font_zh
+ 
+        Button:
+            text:"AudioInput"
+            size_hint_x:15
+            on_press:root.button_act('Audio')   # 指定Button被按下时执行的方法
+ 
+        Button:
+            text:"zhToen"
+            size_hint_x:15
+            on_press:root.button_act('Translate_zh2en')
+
+        Button:
+            text:"enTozh"
+            size_hint_x:15
+            on_press:root.button_act('Translate_en2zh')
+        
+        Button:
+            text:"Clean"
+            size_hint_x:15
+            on_press:root.clean_label()
+        
+
+    # BoxLayout:                # 定义子GUI部件
+    #     height:"40dp"         # 高度
+    #     size_hint_y:None      # 纵向占比
+
+    #     Button:
+    #         text:"Book1"
+    #         size_hint_x:100
+    #         on_press:root.chg_widget('Book1') # 调用另一种转换界面方法
+
+ 
+<MyFormSearch@BoxLayout>:  # 定义另一个Widgets
+    Button:
+        text:"Searching results."
+
+<MyFormBook1@BoxLayout>:  # 定义另一个Widgets
+    Button:
+        text:"Book1"
+
+<MyFormBook2@BoxLayout>:  # 定义另一个Widgets
+    Button:
+        text:"Book2"
+
+<TranslateOutput@MySubForm>:  # 定义另一个Widgets
+    BoxLayout:                # 定义子GUI部件
+        height:"40dp"         # 高度
+        size_hint_y:None      # 纵向占比
+
+        Label:
+            text:root.translate_res
+            size_hint_x:100

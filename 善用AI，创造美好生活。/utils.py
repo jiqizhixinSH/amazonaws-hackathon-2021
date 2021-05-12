@@ -23,7 +23,7 @@ class Agent(object):
         super(Agent, self).__init__()
         self.ACCESS_ID = 'AKIAQ467PMINGHX5FVLO'
         self.ACCESS_KEY = '6gqRjYqqMLMv2R85WIY/TKgVQFj2MetEep0P7F5Z'
-        self.BUCKET_NAME = 'awsaidictdemo202105'
+        self.BUCKET_NAME = 'awsaitranslatedemo202105'
         self.AUDIO_INPUT = 'input.wav'
         self.TRANSCRIBE_OUTPUT = 'transcribe_output.json'
         self.TRANSCRIBE_JOBNAME = 'transcribe_2105'
@@ -183,30 +183,70 @@ class Agent(object):
                               )
         # 获取bucket中对应obj的uri
         uri = "s3://{}/{}".format(self.BUCKET_NAME, object_name)
-        client.start_transcription_job(
-            TranscriptionJobName=jobname,
-            # MediaSampleRateHertz=1024,
-            MediaFormat='wav',
-            Media={
-                'MediaFileUri': uri
-            },
-            OutputBucketName=self.BUCKET_NAME,
-            OutputKey=output_key,
-            IdentifyLanguage=True,
-
-            # LanguageCode='zh-CN',
-            # LanguageOptions=['zh-CN', 'en-GB',],
-        )
-
-        # Check the transcribe job, then delete the job
-        response = client.get_transcription_job(
-            TranscriptionJobName=jobname
-        )
-        if response['TranscriptionJob']['TranscriptionJobStatus']:
-            client.delete_transcription_job(
-                TranscriptionJobName=jobname
+        try:
+            client.start_transcription_job(
+                TranscriptionJobName=jobname,
+                # MediaSampleRateHertz=1024,
+                MediaFormat='wav',
+                Media={
+                    'MediaFileUri': uri
+                },
+                OutputBucketName=self.BUCKET_NAME,
+                OutputKey=output_key,
+                IdentifyLanguage=True,
+    
+                # LanguageCode='zh-CN',
+                # LanguageOptions=['zh-CN', 'en-GB',],
+            )
+        except:
+            # There exists the same transcribe job
+            self.delete_transcribe_job(self.TRANSCRIBE_JOBNAME)
+            client.start_transcription_job(
+                TranscriptionJobName=jobname,
+                # MediaSampleRateHertz=1024,
+                MediaFormat='wav',
+                Media={
+                    'MediaFileUri': uri
+                },
+                OutputBucketName=self.BUCKET_NAME,
+                OutputKey=output_key,
+                IdentifyLanguage=True,
+    
+                # LanguageCode='zh-CN',
+                # LanguageOptions=['zh-CN', 'en-GB',],
             )
 
+        # Check the transcribe job.
+        # If completed, then delete the job.
+        print('Check transcribe job status ...')
+        count = 0
+        while True:
+            response = client.get_transcription_job(
+                TranscriptionJobName=jobname
+            )
+            if response['TranscriptionJob']['TranscriptionJobStatus'].lower() == 'completed' \
+            or response['TranscriptionJob']['TranscriptionJobStatus'].lower() == 'failed':
+                client.delete_transcription_job(
+                    TranscriptionJobName=jobname
+                )
+                print('The transcribe job {} is finished. Now delete the job.'.format(jobname))
+                break
+            count += 1
+            if count > 100:
+                break
+
+        return
+    
+    def delete_transcribe_job(self, jobname):
+        client = boto3.client('transcribe',
+                              region_name='us-east-2',
+                              aws_access_key_id=self.ACCESS_ID,
+                              aws_secret_access_key=self.ACCESS_KEY
+                              )
+        client.delete_transcription_job(
+            TranscriptionJobName=jobname
+        )
+        print('Finish deleting the job: ', jobname)
         return
 
     def transcribe(self,):
@@ -240,13 +280,13 @@ class Agent(object):
         )  # return a dict
         return response['TranslatedText']
 
-    def conversation(self,):
-        """
-        AI chat-robot.
-        Use Amazon Lex.
-        """
-        # client = boto3.client('lexv2-models')
-        return
+#    def conversation(self,):
+#        """
+#        AI chat-robot.
+#        Use Amazon Lex.
+#        """
+#        # client = boto3.client('lexv2-models')
+#        return
 
 
 if __name__ == '__main__':
@@ -256,7 +296,9 @@ if __name__ == '__main__':
     # print(res)
     # agent.get_voice()
     # agent.create_bucket()
-    agent.load2bucket("./input.wav")
+    # agent.load2bucket("./input.wav")
     # agent.delete_bucket(bucket_name)
     # agent.transcribe_core()
     # agent.get_transcribe_res()
+    # agent.delete_transcribe_job(agent.TRANSCRIBE_JOBNAME)
+    agent.transcribe()

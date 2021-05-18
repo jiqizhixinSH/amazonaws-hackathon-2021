@@ -41,9 +41,12 @@ San Jose City Council Meeting Minutes Source: [Legistar](https://sanjose.legista
 
 ***
 
-## 作品名称
+# AI会议便签条
 
-AI会议便签条
+## 团队成员
+
++ Vanessa Hu [LinkedIn](https://www.linkedin.com/in/vanessahu/) | [Github](https://github.com/vanessa920)
++ Sheng Xiong Ding (Roland) [LinkedIn](https://www.linkedin.com/in/roland-ding-403a5b1a/) | [Github](https://github.com/shengxio)
 
 ## 作品介绍
 
@@ -53,7 +56,7 @@ AI会议便签条
 
 美国加州圣何塞市2020年市政会议记录
 - 共计45 份会议记录，842页，1648个段落，11万字
-- 数据来源：[LINK](https://sanjose.legistar.com/Calendar.aspx)
+- 数据来源：[Legistar](https://sanjose.legistar.com/Calendar.aspx)
 
 ## 所使用到的AWS服务
 
@@ -83,7 +86,7 @@ streamlit run UI.py
 
 ## 作品截图
 
-[网站首页](https://github.com/vanessa920/amazonaws-hackathon-2021/blob/main/%E5%96%84%E7%94%A8AI%EF%BC%8C%E5%88%9B%E9%80%A0%E7%BE%8E%E5%A5%BD%E7%94%9F%E6%B4%BB%E3%80%82/AI%20Meeting%20Stickers%20-%20AI%E4%BC%9A%E8%AE%AE%E4%BE%BF%E7%AD%BE%E6%9D%A1%20-%20%E7%82%92%E6%A0%97%E5%AD%90%E5%B0%8F%E9%98%9F/img/home_page.png)
+![网站首页](https://github.com/vanessa920/amazonaws-hackathon-2021/blob/main/%E5%96%84%E7%94%A8AI%EF%BC%8C%E5%88%9B%E9%80%A0%E7%BE%8E%E5%A5%BD%E7%94%9F%E6%B4%BB%E3%80%82/AI%20Meeting%20Stickers%20-%20AI%E4%BC%9A%E8%AE%AE%E4%BE%BF%E7%AD%BE%E6%9D%A1%20-%20%E7%82%92%E6%A0%97%E5%AD%90%E5%B0%8F%E9%98%9F/img/home_page.png)
 
 
 

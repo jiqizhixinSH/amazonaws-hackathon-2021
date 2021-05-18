@@ -1,0 +1,12 @@
+gensim==3.8.3
+spacy==3.0.6
+pandas==1.2.4
+scikit-learn==0.23.2
+altair==4.1.0
+boto3==1.17.62
+en_core_web_sm==3.0.0
+streamlit==0.81.1
+wordcloud==1.8.1.post3+g0b3b942
+tika==1.24
+spacy-streamlit==1.0.0
+numpy==1.20.2

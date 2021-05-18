@@ -7,6 +7,7 @@ import boto3
 import pyaudio
 from pyaudio import PyAudio, paInt16
 import wave
+from playsound import playsound
 
 
 ACCESS_ID = 'AKIAQ467PMINGHX5FVLO'
@@ -25,6 +26,7 @@ class Agent(object):
         self.ACCESS_KEY = '6gqRjYqqMLMv2R85WIY/TKgVQFj2MetEep0P7F5Z'
         self.BUCKET_NAME = 'awsaitranslatedemo202105'
         self.AUDIO_INPUT = 'input.wav'
+        self.AUDIO_OUTPUT_PREFIX = 'speech'
         self.TRANSCRIBE_OUTPUT = 'transcribe_output.json'
         self.TRANSCRIBE_JOBNAME = 'transcribe_2105'
 
@@ -218,7 +220,7 @@ class Agent(object):
 
         # Check the transcribe job.
         # If completed, then delete the job.
-        print('Check transcribe job status ...')
+        # print('Check transcribe job status ...')
         count = 0
         while True:
             response = client.get_transcription_job(
@@ -260,7 +262,6 @@ class Agent(object):
         text = self.get_bucket_file(key=self.TRANSCRIBE_OUTPUT, filename=self.TRANSCRIBE_OUTPUT)
         return text
 
-
     def translate(self, text='I am a child', source='auto', target='zh'):
         """
         Translate input of source language to target language.
@@ -279,6 +280,54 @@ class Agent(object):
             # TerminologyNames=['string',],
         )  # return a dict
         return response['TranslatedText']
+
+    def speech(self, text):
+        client = boto3.client('polly',
+                              region_name='us-east-2',
+                              aws_access_key_id=ACCESS_ID,
+                              aws_secret_access_key=ACCESS_KEY
+                              )
+        try:
+            response = client.start_speech_synthesis_task(
+                OutputFormat='mp3',
+                OutputS3BucketName=self.BUCKET_NAME,
+                OutputS3KeyPrefix=self.AUDIO_OUTPUT_PREFIX,
+                Text=text,
+                VoiceId='Amy',
+            )
+        except:
+            raise NotImplementedError
+            
+        task_id = response['SynthesisTask']['TaskId']
+        audio_name = self.AUDIO_OUTPUT_PREFIX+'.'+task_id+'.mp3'
+        
+        # print('Check speech job status ...')
+        count = 0
+        while True:
+            response = client.get_speech_synthesis_task(
+                TaskId=task_id
+            )
+            if response['SynthesisTask']['TaskStatus'].lower() == 'completed' \
+            or response['SynthesisTask']['TaskStatus'].lower() == 'failed':
+                break
+            count += 1
+            if count > 100 or response['SynthesisTask']['TaskStatus'].lower() == 'failed':
+                print('Fail to get speech.')
+                break
+        
+        # Play the speech
+        s3 = boto3.resource('s3',
+                            region_name='us-east-2',
+                            aws_access_key_id=ACCESS_ID,
+                            aws_secret_access_key=ACCESS_KEY
+                            )
+        
+        s3.Bucket(self.BUCKET_NAME).download_file(audio_name,
+                                                  self.AUDIO_OUTPUT_PREFIX+'.mp3')
+
+        playsound(self.AUDIO_OUTPUT_PREFIX+'.mp3')
+        
+        return
 
 #    def conversation(self,):
 #        """
@@ -301,4 +350,6 @@ if __name__ == '__main__':
     # agent.transcribe_core()
     # agent.get_transcribe_res()
     # agent.delete_transcribe_job(agent.TRANSCRIBE_JOBNAME)
-    agent.transcribe()
+    # agent.transcribe()
+    text = 'Hello'
+    agent.speech(text)

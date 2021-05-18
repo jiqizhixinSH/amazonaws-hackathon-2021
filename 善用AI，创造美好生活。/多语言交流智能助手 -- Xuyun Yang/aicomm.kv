@@ -4,6 +4,7 @@ MyForm:        # 顶级GUI部件类
     orientation:"vertical"    # 定义orientation属性的值（所以添加widget是从上往下）
     text_input:text_box       # 定义用于外部引用的名称，指向id为text_box的GUI部件
     label_output:label_box
+    target_lang:target_spinner
  
     BoxLayout:                # 定义子GUI部件
         height:"20dp"         # 高度
@@ -25,24 +26,26 @@ MyForm:        # 顶级GUI部件类
  
         Button:
             text:"AudioInput"
-            size_hint_x:15
+            size_hint_x:10
             on_press:root.button_act('Audio')   # 指定Button被按下时执行的方法
- 
+                        
+        Spinner:
+            id: target_spinner
+            size_hint_x:10
+            text: 'target'
+            font_name: 'msyh_label'
+            values: ('zh', 'en', 'de', 'ja', 'ru')
+            height: '48dp'
+            
         Button:
-            text:"zhToen"
-            size_hint_x:15
-            on_press:root.button_act('Translate_zh2en')
-
-        Button:
-            text:"enTozh"
-            size_hint_x:15
-            on_press:root.button_act('Translate_en2zh')
-        
+            text:"Start"
+            size_hint_x:10
+            on_press:root.button_act('Translate')
+            
         Button:
             text:"Clean"
-            size_hint_x:15
+            size_hint_x:10
             on_press:root.clean_label()
-        
 
     # BoxLayout:                # 定义子GUI部件
     #     height:"40dp"         # 高度

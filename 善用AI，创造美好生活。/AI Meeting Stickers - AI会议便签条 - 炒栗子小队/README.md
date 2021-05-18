@@ -86,17 +86,17 @@ streamlit run UI.py
 
 ## 作品截图
 
-- 网站首页 - 应用场景介绍，以及全部会议内容的关键词词云。
+- 界面一：网站首页 - 应用场景介绍，以及全部会议内容的关键词词云。
 
 ![网站首页](https://github.com/vanessa920/amazonaws-hackathon-2021/blob/main/%E5%96%84%E7%94%A8AI%EF%BC%8C%E5%88%9B%E9%80%A0%E7%BE%8E%E5%A5%BD%E7%94%9F%E6%B4%BB%E3%80%82/AI%20Meeting%20Stickers%20-%20AI%E4%BC%9A%E8%AE%AE%E4%BE%BF%E7%AD%BE%E6%9D%A1%20-%20%E7%82%92%E6%A0%97%E5%AD%90%E5%B0%8F%E9%98%9F/img/home_page.png)
 
-- 会议便签条 - 根据关键词设定和会议日期范围，精准检索相关的细分内容，并查看是否提及预算以及其他关键会议内容。
+- 界面二：会议便签条 - 根据关键词设定和会议日期范围，精准检索相关的细分内容，并查看是否提及预算以及其他关键会议内容。
 ![会议便签条](https://github.com/vanessa920/amazonaws-hackathon-2021/blob/main/%E5%96%84%E7%94%A8AI%EF%BC%8C%E5%88%9B%E9%80%A0%E7%BE%8E%E5%A5%BD%E7%94%9F%E6%B4%BB%E3%80%82/AI%20Meeting%20Stickers%20-%20AI%E4%BC%9A%E8%AE%AE%E4%BE%BF%E7%AD%BE%E6%9D%A1%20-%20%E7%82%92%E6%A0%97%E5%AD%90%E5%B0%8F%E9%98%9F/img/sticker_page.png)
 
-- 原会议记录 - 全年的会议记录原文，以及各个会议的关键词词云。
+- 界面三：原会议记录 - 全年的会议记录原文，以及各个会议的关键词词云。
 ![原会议记录](https://github.com/vanessa920/amazonaws-hackathon-2021/blob/main/%E5%96%84%E7%94%A8AI%EF%BC%8C%E5%88%9B%E9%80%A0%E7%BE%8E%E5%A5%BD%E7%94%9F%E6%B4%BB%E3%80%82/AI%20Meeting%20Stickers%20-%20AI%E4%BC%9A%E8%AE%AE%E4%BE%BF%E7%AD%BE%E6%9D%A1%20-%20%E7%82%92%E6%A0%97%E5%AD%90%E5%B0%8F%E9%98%9F/img/original_page.png)
 
-- 上传功能 - 支持上传最新的会议记录，并重新训练模型，生成更多的会议便签条。
+- 界面四：上传功能 - 支持上传最新的会议记录，并重新训练模型，生成更多的会议便签条。
 ![上传会议记录](https://github.com/vanessa920/amazonaws-hackathon-2021/blob/main/%E5%96%84%E7%94%A8AI%EF%BC%8C%E5%88%9B%E9%80%A0%E7%BE%8E%E5%A5%BD%E7%94%9F%E6%B4%BB%E3%80%82/AI%20Meeting%20Stickers%20-%20AI%E4%BC%9A%E8%AE%AE%E4%BE%BF%E7%AD%BE%E6%9D%A1%20-%20%E7%82%92%E6%A0%97%E5%AD%90%E5%B0%8F%E9%98%9F/img/upload_page.png)
 
 

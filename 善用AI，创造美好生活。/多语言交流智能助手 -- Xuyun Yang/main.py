@@ -27,8 +27,6 @@ class MyForm(BoxLayout):  # 此处类定义虽然为空，但会将my.kv的GUI�
     kivy.core.text.Label.register("msyh_label", "msyh.ttc")
     
     def button_act(self, action=None):
-        print('Pressing button ...')
-        self.label_output.text = "Waiting ..."
         if action is None:
             res = self.text_input.text # 获取text_input所指向GUI部件的text值，
         elif action == 'Translate':
@@ -38,21 +36,17 @@ class MyForm(BoxLayout):  # 此处类定义虽然为空，但会将my.kv的GUI�
             text = self.agent.transcribe()
             t = self.target_lang.text
             # Optional: display on the UI
-            res = self.agent.translate(Text=text, source='auto', target=t)
+            res = self.agent.translate(text=text, source='auto', target=t)
         else:
             raise NotImplementedError
 
         print(res)  # 打印结果到控制台
         # 显示翻译结果到UI界面
-        self.label_output.text = "Waiting ..."
-        time.sleep(5)
         self.label_output.text = res
-#        TRANSCRIBE_RES = res
-#        cur_wdgt = Factory.TranslateOutput()
-#        self.add_widget(cur_wdgt)
 
         # 语音输出翻译结果
         self.agent.speech(res)
+        print('Finish speeching ...')
         return
     
     def clean_label(self,):

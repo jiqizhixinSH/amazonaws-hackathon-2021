@@ -131,7 +131,7 @@ class Agent(object):
         FORMAT = pyaudio.paInt16
         CHANNELS = 1
         RATE = 8000
-        RECORD_SECONDS = 10
+        RECORD_SECONDS = 5
         # WAVE_OUTPUT_FILENAME = "input.wav"
 
         p = pyaudio.PyAudio()  # 实例化PyAudio ，它设置portaudio系统
@@ -336,6 +336,9 @@ class Agent(object):
 #        """
 #        # client = boto3.client('lexv2-models')
 #        return
+
+# Availabel language code
+## en | da | es | fr | ja | ko | nl |pl | ru | tr |
 
 
 if __name__ == '__main__':

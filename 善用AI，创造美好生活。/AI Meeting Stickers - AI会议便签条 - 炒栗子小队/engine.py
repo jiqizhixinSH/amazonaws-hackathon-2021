@@ -8,6 +8,10 @@ import pickle
 import datetime
 import gensim
 import time
+import os
+
+from pathlib import Path,PosixPath,WindowsPath,PureWindowsPath,PurePosixPath
+from os.path import join
 
 from gensim import corpora, models, similarities
 from utilities import *
@@ -330,28 +334,29 @@ def testinit(filename = 'city_sanjose_data.csv'):
     Engine.loadCSV(filename)
     end = time.time()
     
-    print(f'takes {start - end} second to train')
+    print(f'takes {end-start} second to train')
     return Engine
 
 def saveEngine(filename, obj_engine):
-    start = time.time()
     
-    with open(filename,'wb') as outfile:
-        pickle.dump(obj_engine,outfile,pickle.HIGHEST_PROTOCOL)
+    start = time.time()
+    fulldir = join(os.getcwd(),filename)
+    file_to_open = Path(fulldir)
+    pickle.dump(obj_engine,file_to_open.open('wb'))
         
     end = time.time()
-    print(f'takes {start - end} second to save')
+    print(f'takes {end-start} second to save')
     
     return filename
 
 def loadEngine(filename):
     start = time.time()
-
-    with open(filename,'rb') as infile:
-        obj_engine = pickle.load(infile)
+    fulldir = join(os.getcwd(),filename)
+    file_to_open = Path(fulldir)
+    obj_engine = pickle.load(file_to_open.open('rb'))
         
     end = time.time()
-    print(f'takes {start - end} second to load')
+    print(f'takes {end-start} second to load')
     return obj_engine
 
 def test():

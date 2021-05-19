@@ -45,7 +45,7 @@ def init():
     if os.path.exists('nlp_engine.pkl'):
         real_engine = loadEngine('nlp_engine.pkl')
     # Load style
-    #st.set_page_config(layout="wide")
+    st.set_page_config(layout="wide")
     st.markdown('<style>' + open('UI-styles.css').read() + '</style>', unsafe_allow_html=True)
     
     return real_engine

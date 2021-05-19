@@ -1,4 +1,4 @@
-# Meeting Stickers Demo
+# AI Meeting Stickers
 
 AWS Hackathon Online 2021 ｜ 
 Organizer: Heart of Machine

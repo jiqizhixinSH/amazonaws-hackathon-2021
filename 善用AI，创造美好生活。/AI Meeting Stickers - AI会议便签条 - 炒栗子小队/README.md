@@ -42,6 +42,7 @@ San Jose City Council Meeting Minutes Source: [Legistar](https://sanjose.legista
 ***
 
 # AI会议便签条
+作品呈现：[DEMO](https://share.streamlit.io/vanessa920/aws-comp-nlp/main/UI.py)
 
 ## 团队成员
 

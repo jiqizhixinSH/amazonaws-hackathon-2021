@@ -5,7 +5,7 @@ Organizer: Heart of Machine
 
 ## Project Name
 
-AI Meeting Stickers
+AI Meeting Stickers: [DEMO](https://share.streamlit.io/vanessa920/aws-comp-nlp/main/UI.py)
 
 ## Project Team
 
@@ -42,7 +42,7 @@ San Jose City Council Meeting Minutes Source: [Legistar](https://sanjose.legista
 ***
 
 # AI会议便签条
-APP DEMO 网站呈现：[AI Stickers](https://share.streamlit.io/vanessa920/aws-comp-nlp/main/UI.py)
+APP DEMO 网站呈现：[AI Meeting Stickers](https://share.streamlit.io/vanessa920/aws-comp-nlp/main/UI.py)
 
 ## 团队成员
 

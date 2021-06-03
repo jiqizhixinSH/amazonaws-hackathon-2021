@@ -254,13 +254,12 @@ class engine:
         return self.df[self.df['filename']==filename]
     
 
-    def addContent(self,filename):
+    def addContent(self,filename,objEngine = None):
         new_df = pdf2df(filename)
+        new_df.to_csv('checkpoint.csv')
         
         statusUpdate('--converting dataframe--')
         new_df['date'] = pd.to_datetime(new_df['date'])
-        #print(new_df.head())
-        #print(new_df.count()[])
         
         art_i = new_df.count()['date']
         new_df['subID_count'] = art_i
@@ -269,8 +268,9 @@ class engine:
         
         statusUpdate('--created object dataframe df_subID--')
         newSub_df = new_df[new_df['subID_count']!=0].reset_index()
+                  
         self.df_subID = self.df_subID.append(newSub_df,ignore_index = True)
-        
+            
         statusUpdate('--clean and spacy transforming dataframe content I--')
         text = newSub_df['content']
         text = text.apply(lambda x: self.clean_text(x))
@@ -285,9 +285,7 @@ class engine:
         if self.retrain():
             statusUpdate('--engine retrained--')
         else:
-            statusUpdate('--engine retrain failed--')
-        
-        
+            statusUpdate('--engine retrain failed--') 
 
 # get number of pages from the full content base
     def getPageCount(self):
@@ -342,7 +340,9 @@ def saveEngine(filename, obj_engine):
     start = time.time()
     fulldir = join(os.getcwd(),filename)
     file_to_open = Path(fulldir)
-    pickle.dump(obj_engine,file_to_open.open('wb'))
+    
+    with open(file_to_open,'wb') as outfile:
+        pickle.dump(obj_engine,outfile,pickle.HIGHEST_PROTOCOL)
         
     end = time.time()
     print(f'takes {end-start} second to save')
@@ -353,7 +353,8 @@ def loadEngine(filename):
     start = time.time()
     fulldir = join(os.getcwd(),filename)
     file_to_open = Path(fulldir)
-    obj_engine = pickle.load(file_to_open.open('rb'))
+    with open(file_to_open,'rb') as infile:
+        obj_engine = pickle.load(infile)
         
     end = time.time()
     print(f'takes {end-start} second to load')
@@ -365,8 +366,8 @@ def test():
 
     init_engine = testinit()
     
-    saved_name = savepkl(enginefilename,init_engine)
-    copy_engine = loadpkl(saved_name)
+    saved_name = saveEngine(enginefilename,init_engine)
+    copy_engine = loadEngine(saved_name)
     
     statusUpdate('--test end--')
     statusUpdate(f'--test saved file name: {saved_name}--')

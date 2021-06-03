@@ -24,10 +24,10 @@ from engine import engine,loadEngine,saveEngine
 from utilities import *
 from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 from spacy import displacy
-#from .util import load_model, process_text, get_svg, get_html, get_color_styles, LOGO
+from collections import Counter
 
 
-stop_words = ENGLISH_STOP_WORDS.union(word for word in ['City','San','Jose','Council','Report','motion','Item','Council','Councilmember','Title','Service','DISTRICT','Page','Action','Section','Project','File','appointment','approval','Manager','PUBLIC','Minutes','fee','funding','Amend','provided','Agreement','staff','S','services','changes','the City','Amendment to','of San','City of'])
+stop_words = ENGLISH_STOP_WORDS.union(word for word in ['City','The','No','No.','José','Jose','2020','San','Jose','Council','Report','motion','Item','Council','Councilmember','Title','Service','DISTRICT','Page','Action','Section','Project','File','appointment','approval','Manager','PUBLIC','Minutes','fee','funding','Amend','provided','Agreement','staff','S','services','changes','the City','Amendment to','of San','City of','(a)','(b)','Not','(11-0.)'])
 
 NER_ATTRS = ["text", "label_", "start", "end", "start_char", "end_char"]
 TOKEN_ATTRS = ["idx", "text", "lemma_", "pos_", "tag_", "dep_", "head", "morph",
@@ -113,8 +113,23 @@ def view_meeting(obj_engine):
     startdate = npdate2date(min(obj_engine.chronicle))
     enddate = npdate2date(max(obj_engine.chronicle))
     
+    textLS = obj_engine.getText().split()
+    filtered_LS = [w for w in textLS if w not in obj_engine.exclusion and w not in stop_words]
+    counted = Counter(filtered_LS)
+    most_occur = [t for (t,v) in counted.most_common(25)]
+    most_occur_cleaned =[]
+    for w in most_occur:
+        w = w.replace(':','')
+        w = w.replace(',','')
+        w = w.replace('.','')
+        most_occur_cleaned.append(w)
+    
     # setup sidebar
-    keywords = st.sidebar.text_input('enter your keywords, seperate with comma')
+    keywords = st.sidebar.text_input('Enter Your Keywords(seperate with comma)')
+    keywords_ls = st.sidebar.multiselect('Or Choose the Suggested Keywords',most_occur_cleaned)
+    for w in keywords_ls:
+        keywords+=f',{w.lower()}'
+    print(keywords)
     (date_start,date_end) = st.sidebar.slider('what time frame?:', startdate, enddate, (startdate,enddate),key = ('date_start','date_end'))
     hasDollar = st.sidebar.checkbox('contains dollar values')
     result = obj_engine.searchKeywords(keywords,date_start,date_end,hasDollar)
@@ -194,6 +209,7 @@ def view_original(obj_engine):
     
 # Issue, the control for upload was gone?
 def content_control(obj_engine):
+    
     uploaded_file = st.sidebar.file_uploader("Upload your meeting minutes file", type=["PDF"])
     
     if uploaded_file is not None:
@@ -201,22 +217,27 @@ def content_control(obj_engine):
         
         try:
             obj_engine.addContent(uploaded_file)
-        except:
+            # ok apparently in here is where the problem is.
+        except Exception as err:
             st.markdown('Server is busy, please try again later', unsafe_allow_html=True)
-        '''
-        saveEngine(engineName,obj_engine)
-        s3 = boto3.client('s3')
+            st.markdown(str(err))
+        
+        pickle.dump(obj_engine,open(engineName,'wb'),pickle.HIGHEST_PROTOCOL)
+        
+        s3 = boto3.client('s3',
+                         aws_access_key_id=ACCESS_KEY,
+                         aws_secret_access_key=SECRET_KEY)
         s3.upload_file(
             engineName, 'stickers-lambda',engineName,
-            ExtraArgs={'ACL': 'public-read'}
+            ExtraArgs = {'ACL': 'public-read'}
         )
-        '''
+        
         EXTERNAL_DEPENDENCIES[engineName]['date']=datetime.today()
         
         Body_html = f'''**{uploaded_file.name}** uploaded. New AI_core has been updated and uploaded to Cloud'''
     else:
         Body_html = f'''Here you can upload the meeting pdf files and decide to include it in the content pool.'''
-        
+    
     st.markdown(Body_html, unsafe_allow_html=True)
 
 def statSum(obj_engine):

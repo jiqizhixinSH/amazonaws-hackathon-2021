@@ -5,14 +5,14 @@ MyForm:        # 顶级GUI部件类
     text_input:text_box       # 定义用于外部引用的名称，指向id为text_box的GUI部件
     label_output:label_box
     target_lang:target_spinner
- 
+
     BoxLayout:                # 定义子GUI部件
         height:"20dp"         # 高度
         size_hint_y:80      # 纵向占比
 
         Label:
             id:label_box
-            text:""
+            text:""  # (Waiting ...)
             size_hint_x:100
             
     BoxLayout:                # 定义子GUI部件
@@ -21,19 +21,19 @@ MyForm:        # 顶级GUI部件类
  
         TextInput:
             id:text_box
-            size_hint_x:40  # 横向占比（多个同级GUI部件的占比比例来分配实际大小）
+            size_hint_x:30  # 横向占比（多个同级GUI部件的占比比例来分配实际大小）
             font_name:root.font_zh
  
         Button:
-            text:"AudioInput"
+            text:"Audio Input"
             size_hint_x:10
             on_press:root.button_act('Audio')   # 指定Button被按下时执行的方法
                         
         Spinner:
             id: target_spinner
             size_hint_x:10
-            text: 'target'
-            font_name: 'msyh_label'
+            text: 'Target'
+            font_name:root.font_zh  # 'msyh_label'
             values: ('en','da','es','fr','ja','ko','nl','pl','ru','tr')  # en | da | es | fr | ja | ko | nl |pl | ru | tr |
             height: '48dp'
             
@@ -41,39 +41,23 @@ MyForm:        # 顶级GUI部件类
             text:"Start"
             size_hint_x:10
             on_press:root.button_act('Translate')
+
+        Button:
+            text:"Read Aloud"
+            size_hint_x:10
+            on_press:root.button_act('Speech')
             
         Button:
             text:"Clean"
             size_hint_x:10
             on_press:root.clean_label()
 
-    # BoxLayout:                # 定义子GUI部件
-    #     height:"40dp"         # 高度
-    #     size_hint_y:None      # 纵向占比
 
-    #     Button:
-    #         text:"Book1"
-    #         size_hint_x:100
-    #         on_press:root.chg_widget('Book1') # 调用另一种转换界面方法
-
- 
-<MyFormSearch@BoxLayout>:  # 定义另一个Widgets
-    Button:
-        text:"Searching results."
-
-<MyFormBook1@BoxLayout>:  # 定义另一个Widgets
-    Button:
-        text:"Book1"
-
-<MyFormBook2@BoxLayout>:  # 定义另一个Widgets
-    Button:
-        text:"Book2"
-
-<TranslateOutput@MySubForm>:  # 定义另一个Widgets
-    BoxLayout:                # 定义子GUI部件
-        height:"40dp"         # 高度
-        size_hint_y:None      # 纵向占比
-
-        Label:
-            text:root.translate_res
-            size_hint_x:100
+# <TranslateOutput@MySubForm>:  # 定义另一个Widgets
+#     BoxLayout:                # 定义子GUI部件
+#         height:"40dp"         # 高度
+#         size_hint_y:None      # 纵向占比
+#
+#         Label:
+#             text:root.translate_res
+#             size_hint_x:100

@@ -1,0 +1,30 @@
+appdirs==1.4.4
+boto3==1.17.57
+botocore==1.20.57
+# Editable install with no version control (buildozer==1.2.0.dev0)
+-e c:\yxy\installers\buildozer
+certifi==2020.12.5
+distlib==0.3.1
+docutils @ file:///D:/bld/docutils_1618676434341/work
+filelock==3.0.12
+importlib-metadata==4.0.1
+importlib-resources==5.1.2
+jmespath==0.10.0
+Kivy @ file:///D:/bld/kivy_1619129491799/work
+numpy==1.19.5
+olefile @ file:///home/conda/feedstock_root/build_artifacts/olefile_1602866521163/work
+pexpect==4.8.0
+Pillow @ file:///D:/bld/pillow_1617818275641/work
+playsound==1.2.2
+ptyprocess==0.7.0
+PyAudio==0.2.11
+Pygments @ file:///home/conda/feedstock_root/build_artifacts/pygments_1615243893546/work
+python-dateutil==2.8.1
+s3transfer==0.4.2
+sh==1.14.1
+six==1.15.0
+typing-extensions==3.7.4.3
+urllib3==1.26.4
+virtualenv==20.4.4
+wincertstore==0.2
+zipp==3.4.1

@@ -1,0 +1,63 @@
+# https://blog.csdn.net/cloveses/article/details/80385986
+MyForm:        # 顶级GUI部件类
+<MyForm>:      # 定义MyForm类
+    orientation:"vertical"    # 定义orientation属性的值（所以添加widget是从上往下）
+    text_input:text_box       # 定义用于外部引用的名称，指向id为text_box的GUI部件
+    label_output:label_box
+    target_lang:target_spinner
+
+    BoxLayout:                # 定义子GUI部件
+        height:"20dp"         # 高度
+        size_hint_y:80      # 纵向占比
+
+        Label:
+            id:label_box
+            text:""  # (Waiting ...)
+            size_hint_x:100
+            
+    BoxLayout:                # 定义子GUI部件
+        height:"20dp"         # 高度
+        size_hint_y:20     # 纵向占比 None
+ 
+        TextInput:
+            id:text_box
+            size_hint_x:30  # 横向占比（多个同级GUI部件的占比比例来分配实际大小）
+            font_name:root.font_zh
+ 
+        Button:
+            text:"Audio Input"
+            size_hint_x:10
+            on_press:root.button_act('Audio')   # 指定Button被按下时执行的方法
+                        
+        Spinner:
+            id: target_spinner
+            size_hint_x:10
+            text: 'Target'
+            font_name:root.font_zh  # 'msyh_label'
+            values: ('en','da','es','fr','ja','ko','nl','pl','ru','tr')  # en | da | es | fr | ja | ko | nl |pl | ru | tr |
+            height: '48dp'
+            
+        Button:
+            text:"Start"
+            size_hint_x:10
+            on_press:root.button_act('Translate')
+
+        Button:
+            text:"Read Aloud"
+            size_hint_x:10
+            on_press:root.button_act('Speech')
+            
+        Button:
+            text:"Clean"
+            size_hint_x:10
+            on_press:root.clean_label()
+
+
+# <TranslateOutput@MySubForm>:  # 定义另一个Widgets
+#     BoxLayout:                # 定义子GUI部件
+#         height:"40dp"         # 高度
+#         size_hint_y:None      # 纵向占比
+#
+#         Label:
+#             text:root.translate_res
+#             size_hint_x:100

@@ -63,7 +63,7 @@ Organizer: Heart of Machine
 
 ## Project Name
 
-AI Meeting Stickers: [DEMO](https://share.streamlit.io/vanessa920/aws-comp-nlp/main/UI.py) | [Presentation](https://github.com/vanessa920/amazonaws-hackathon-2021/blob/main/%E5%96%84%E7%94%A8AI%EF%BC%8C%E5%88%9B%E9%80%A0%E7%BE%8E%E5%A5%BD%E7%94%9F%E6%B4%BB%E3%80%82/AI%20Meeting%20Stickers%20-%20AI%E4%BC%9A%E8%AE%AE%E4%BE%BF%E7%AD%BE%E6%9D%A1%20-%20%E7%82%92%E6%A0%97%E5%AD%90%E5%B0%8F%E9%98%9F/img/AI%20Meeting%20Stickers.pdf)
+AI Meeting Stickers: [DEMO](https://meeting-stickers.000webhostapp.com/) | [Presentation](https://github.com/vanessa920/amazonaws-hackathon-2021/blob/main/%E5%96%84%E7%94%A8AI%EF%BC%8C%E5%88%9B%E9%80%A0%E7%BE%8E%E5%A5%BD%E7%94%9F%E6%B4%BB%E3%80%82/AI%20Meeting%20Stickers%20-%20AI%E4%BC%9A%E8%AE%AE%E4%BE%BF%E7%AD%BE%E6%9D%A1%20-%20%E7%82%92%E6%A0%97%E5%AD%90%E5%B0%8F%E9%98%9F/img/AI%20Meeting%20Stickers.pdf)
 
 ## Project Team
 
